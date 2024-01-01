@@ -1,0 +1,9 @@
+com\mycompany\pruebatecnica\models\Empleado.class
+com\mycompany\pruebatecnica\models\Controladora.class
+com\mycompany\pruebatecnica\PruebaTecnica.class
+com\mycompany\pruebatecnica\persistence\exceptions\NonexistentEntityException.class
+com\mycompany\pruebatecnica\models\Empleado_.class
+com\mycompany\pruebatecnica\persistence\ControladoraPersistencia.class
+com\mycompany\pruebatecnica\persistence\EmpleadoJpaController.class
+com\mycompany\pruebatecnica\persistence\exceptions\IllegalOrphanException.class
+com\mycompany\pruebatecnica\persistence\exceptions\PreexistingEntityException.class
