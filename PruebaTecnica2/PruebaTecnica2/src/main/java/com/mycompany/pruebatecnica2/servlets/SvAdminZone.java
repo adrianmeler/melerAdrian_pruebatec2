@@ -37,6 +37,7 @@ public class SvAdminZone extends HttpServlet {
         ArrayList<Turn> turns = new ArrayList<>();
         
         //Here I iterate through the list of turns and add the turn into an arraylist
+        try{
         for(Turn turn : control.bringTurns()){
             turns.add(turn);
         }
@@ -44,7 +45,9 @@ public class SvAdminZone extends HttpServlet {
         request.setAttribute("results", turns);
         
         request.getRequestDispatcher("adminZone.jsp").forward(request, response);
-    
+        }catch(Exception e){
+            System.out.println(e);
+        }
         
     }
 

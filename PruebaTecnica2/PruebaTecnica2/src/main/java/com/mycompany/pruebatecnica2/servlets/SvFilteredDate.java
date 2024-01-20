@@ -54,26 +54,31 @@ public class SvFilteredDate extends HttpServlet {
         Date filteredDate = null;
         
         //I make sure that the date specified by the user isnt empty
-        if(filteredDateString != null){
+        try{
             
-            try {
-                filteredDate = dateFormat.parse(filteredDateString);
-            } catch (ParseException ex) {
-                Logger.getLogger(SvFilteredDate.class.getName()).log(Level.SEVERE, null, ex);
+            if(filteredDateString != null){
+                try {
+                    filteredDate = dateFormat.parse(filteredDateString);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SvFilteredDate.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                final Date filteredDateFinal = filteredDate;
+                //I stream the turns and check if the turn date equals the users input
+                List<Turn> filteredTurns = control.bringTurns().stream()
+                        .filter(turn -> turn.getDate().equals(filteredDateFinal))
+                        .collect(Collectors.toList());
+            
+                request.setAttribute("results", filteredTurns);
+           
+                request.getRequestDispatcher("turnDate.jsp").forward(request, response);
+            }else{
+                response.sendRedirect("turnDate.jsp");
             }
-            
-            final Date filteredDateFinal = filteredDate;
-            //I stream the turns and check if the turn date equals the users input
-            List<Turn> filteredTurns = control.bringTurns().stream()
-                .filter(turn -> turn.getDate().equals(filteredDateFinal))
-                .collect(Collectors.toList());
-            
-            request.setAttribute("results", filteredTurns);
-            
-            request.getRequestDispatcher("turnDate.jsp").forward(request, response);
-       
+        }catch(Exception e){
+            System.out.println(e);
         }
-      
+     
     }
 
     

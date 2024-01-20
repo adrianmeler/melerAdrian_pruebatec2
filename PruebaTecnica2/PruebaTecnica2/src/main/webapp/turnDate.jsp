@@ -199,7 +199,7 @@
                                        <tr>
                                            <td><%= dateFormat.format(turn.getDate()) %></td>
                                            <td><%= turn.getTask()%></td>
-                                           <td><%= turn.getDate()%></td>
+                                           <td><%= turn.getState()%></td>
                                            <td><%= turn.getCitizen().getName()%></td>
                                            <td><%= turn.getCitizen().getDni()%></td>
                                        </tr>

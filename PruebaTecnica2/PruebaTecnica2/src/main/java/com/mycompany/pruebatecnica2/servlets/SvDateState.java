@@ -58,6 +58,7 @@ public class SvDateState extends HttpServlet {
         
         Date filteredDate = null;
         //I make sure that the date and state chosen by the user are not empty
+        try{
         if((dateString != null) && (state != null)){
         //I give the state variable a value based on the input given by the user
             if(state.equals("pending")){
@@ -83,6 +84,11 @@ public class SvDateState extends HttpServlet {
             request.setAttribute("results", turns);
             
             request.getRequestDispatcher("turnState.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("turnState.jsp");
+        }
+        }catch(Exception e){
+            System.out.println(e);
         }
     }
 

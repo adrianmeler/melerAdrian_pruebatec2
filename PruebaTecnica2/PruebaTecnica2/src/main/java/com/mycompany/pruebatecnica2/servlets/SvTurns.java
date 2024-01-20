@@ -71,32 +71,38 @@ public class SvTurns extends HttpServlet {
         }
         
         //Here I use two static methods to validate the name and dni 
-        if((nameValidation(name) == false) && (dniValidation(dni) == false)){
-       
-            citizen.setIdCitizen(0);
+        try{
             
-            citizen.setName(name);
+            if((nameValidation(name) == false) && (dniValidation(dni) == false)){
+                citizen.setIdCitizen(0);
+
+                citizen.setName(name);
             
-            citizen.setDni(dni);
+                citizen.setDni(dni);
+            
+                citizen.setTurns(turns);
+           
+                control.createCitizen(citizen);
+            
+            }else{
+               response.sendRedirect("index.jsp"); 
+            }
+        
+            Turn turn = new Turn(0,date,procedure,state,citizen);
+            
+            control.createTurn(turn);
+            
+            turns.add(turn);
             
             citizen.setTurns(turns);
             
-            control.createCitizen(citizen);
+            control.editCitizen(citizen);
+            
+            response.sendRedirect("index.jsp");
+        
+        }catch (Exception e){
+            System.out.println(e);
         }
-        
-        Turn turn = new Turn(0,date,procedure,state,citizen);
-        
-        control.createTurn(turn);
-        
-        turns.add(turn);
-        
-        citizen.setTurns(turns);
-        
-        control.editCitizen(citizen);
-        
-        
-        response.sendRedirect("index.jsp");
-        
         
     }
 
